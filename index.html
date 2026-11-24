@@ -4,137 +4,369 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sổ Thu Chi · Xe 50F20703V</title>
-  <link rel="icon" type="image/png" href="https://kietta130881.github.io/KIETTA/SOTHUCHI.png" />
-  <link rel="apple-touch-icon" href="https://kietta130881.github.io/KIETTA/SOTHUCHI.png" />
   <style>
     :root {
-      --bg: #f4f7f5;
+      --bg: #f4f6f9;
       --card: #ffffff;
-      --text: #16221b;
-      --muted: #5a6b61;
-      --green: #0f766e;
-      --green-light: #e6f4f1;
-      --red: #b91c1c;
-      --red-light: #fef2f2;
-      --border: #dce5e0;
+      --text: #0f172a;
+      --muted: #64748b;
+      --line: #e2e8f0;
+      --primary: #0f766e;
+      --thu: #15803d;
+      --chi: #b91c1c;
+      --vetc-bg: #14532d;
+      --vetc-text: #ffffff;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: var(--bg); color: var(--text); padding: 14px; }
-    .wrap { max-width: 920px; margin: 0 auto; }
-    .header {
-      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 14px; padding: 14px 16px; margin-bottom: 12px;
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
     }
-    .header-left { display: flex; align-items: center; gap: 12px; }
-    .header img { width: 46px; height: 46px; border-radius: 10px; object-fit: cover; border: 1px solid var(--border); }
-    .header h1 { font-size: 18px; line-height: 1.3; }
-    .header p { font-size: 13px; color: var(--muted); }
-    .btn-reload {
-      border: 1px solid var(--green); background: var(--green-light); color: var(--green);
-      padding: 8px 12px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer;
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 16px;
     }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 12px; }
-    .card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 14px; padding: 14px 16px;
+
+    .header-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
     }
-    .card .label { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
-    .card .val { font-size: 20px; font-weight: 700; }
-    .val.pos { color: var(--green); }
-    .val.neg { color: var(--red); }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: #fef3c7;
+      border: 1px solid #f59e0b;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      color: #92400e;
+      font-size: 13px;
+    }
+
+    .brand h1 { margin: 0; font-size: 20px; }
+    .brand p { margin: 2px 0 0; font-size: 13px; color: var(--muted); }
+
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn:hover { background: #f8fafc; }
+
+    .btn.primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .summary-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+
+    .summary-label { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .summary-value { font-size: 22px; font-weight: 700; }
+    .summary-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    .val-thu { color: var(--thu); }
+    .val-chi { color: var(--chi); }
+    .val-ton { color: #0f172a; }
+
+    .vetc-banner {
+      margin-top: 12px;
+      background: var(--vetc-bg);
+      color: var(--vetc-text);
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .vetc-title { font-weight: 700; font-size: 14px; }
+    .vetc-sub { font-size: 12px; opacity: 0.9; }
+    .vetc-amount { font-size: 22px; font-weight: 700; }
+
     .panel {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 14px; padding: 14px 16px; margin-bottom: 12px;
+      margin-top: 14px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px 18px;
     }
+
     .panel-top {
-      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
-      gap: 10px; margin-bottom: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 12px;
     }
-    .panel-title { font-size: 16px; font-weight: 700; }
-    .sub-stat { font-size: 13px; color: var(--muted); }
-    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
-    .btn-filter {
-      border: 1px solid var(--border); background: #fff; color: var(--text);
-      padding: 7px 12px; border-radius: 999px; font-size: 13px; cursor: pointer;
+
+    .panel-top h2 { margin: 0; font-size: 16px; }
+    .stats-meta { font-size: 13px; color: var(--muted); font-weight: 600; }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
     }
-    .btn-filter.active { background: var(--green); color: #fff; border-color: var(--green); font-weight: 600; }
+
+    .time-filter-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: flex-end;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .time-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 145px;
+    }
+
+    .time-field label {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .time-field input,
+    .time-field select,
     .search-input {
-      width: 100%; padding: 10px 12px; border: 1px solid var(--border);
-      border-radius: 10px; font-size: 14px; margin-bottom: 12px; background: #fafcfb;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-size: 13px;
+      background: #ffffff;
+      color: var(--text);
     }
-    .table-wrap { overflow-x: auto; max-height: 480px; overflow-y: auto; border: 1px solid var(--border); border-radius: 10px; }
-    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+
+    .search-input {
+      width: 100%;
+      padding: 9px 12px;
+      margin-bottom: 12px;
+    }
+
+    .table-wrap { width: 100%; overflow-x: auto; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    th, td {
+      padding: 9px 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
     th {
-      position: sticky; top: 0; background: #eef3f0; color: var(--text);
-      text-align: left; padding: 10px; border-bottom: 1px solid var(--border); z-index: 1;
+      color: var(--muted);
+      font-weight: 700;
+      background: #f8fafc;
+      white-space: nowrap;
     }
-    td { padding: 9px 10px; border-bottom: 1px solid #edf2ef; vertical-align: top; }
-    tr:last-child td { border-bottom: none; }
+
+    th.num, td.num {
+      text-align: right;
+      white-space: nowrap;
+      font-weight: 700;
+    }
+
     .badge {
-      display: inline-block; padding: 2px 8px; border-radius: 999px;
-      font-size: 11px; font-weight: 600;
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
     }
-    .badge.thu { background: var(--green-light); color: var(--green); }
-    .badge.chi { background: var(--red-light); color: var(--red); }
-    .amt-thu { color: var(--green); font-weight: 600; text-align: right; white-space: nowrap; }
-    .amt-chi { color: var(--red); font-weight: 600; text-align: right; white-space: nowrap; }
-    .share-box {
-      background: var(--green-light); border: 1px solid #b5ddd4;
-      border-radius: 12px; padding: 12px 14px; font-size: 13px;
+
+    .badge-thu { background: #dcfce7; color: var(--thu); }
+    .badge-chi { background: #fee2e2; color: var(--chi); }
+
+    .footer-note {
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
     }
-    .share-box strong { display: block; margin-bottom: 4px; color: var(--green); }
-    .status-note { margin-top: 10px; font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+    @media (max-width: 720px) {
+      .summary-grid { grid-template-columns: 1fr; }
+      .time-field { flex: 1 1 45%; min-width: 130px; }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="header">
-      <div class="header-left">
-        <img src="https://kietta130881.github.io/KIETTA/SOTHUCHI.png" alt="Logo Sổ Thu Chi" />
+  <div class="container">
+    <div class="header-card">
+      <div class="brand">
+        <div class="brand-badge">50F</div>
         <div>
           <h1>Sổ Thu Chi · Xe 50F20703V</h1>
-          <p>Dữ liệu lấy trực tiếp từ Apps Script (Code.gs) · Xe 50F20703V</p>
+          <p>Đồng bộ trực tiếp Google Sheet / Apps Script · Xe 50F20703V</p>
         </div>
       </div>
-      <button class="btn-reload" id="reloadBtn" type="button">Cập nhật lại</button>
+      <div class="header-actions">
+        <button type="button" class="btn primary" id="exportImageBtn">Xuất ảnh báo cáo</button>
+        <button type="button" class="btn" id="refreshBtn">Cập nhật lại</button>
+      </div>
     </div>
 
-    <div class="grid">
-      <div class="card">
-        <div class="label">Tổng Thu</div>
-        <div class="val pos" id="sumThu">Đang tải...</div>
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="summary-label">Tổng Thu</div>
+        <div class="summary-value val-thu" id="totalThu">96.707.000 ₫</div>
+        <div class="summary-sub" id="scopeThu">Toàn bộ dữ liệu đang lọc</div>
       </div>
-      <div class="card">
-        <div class="label">Tổng Chi</div>
-        <div class="val neg" id="sumChi">Đang tải...</div>
+      <div class="summary-card">
+        <div class="summary-label">Tổng Chi</div>
+        <div class="summary-value val-chi" id="totalChi">28.699.767 ₫</div>
+        <div class="summary-sub" id="scopeChi">Toàn bộ dữ liệu đang lọc</div>
       </div>
-      <div class="card">
-        <div class="label">Tồn Quỹ (Thu − Chi)</div>
-        <div class="val pos" id="sumBalance">Đang tải...</div>
+      <div class="summary-card">
+        <div class="summary-label">Tồn Quỹ (Thu − Chi)</div>
+        <div class="summary-value val-ton" id="totalTonQuy">68.007.233 ₫</div>
+        <div class="summary-sub" id="scopeTon">Cân đối theo bộ lọc hiện tại</div>
       </div>
+    </div>
+
+    <div class="vetc-banner">
+      <div>
+        <div class="vetc-title">ĐỐI SOÁT VÍ VETC · XE 50F20703V</div>
+        <div class="vetc-sub">Số dư thực tế Ví VETC (30/10/2026 – 23/11/2026)</div>
+      </div>
+      <div class="vetc-amount" id="vetcBalance">404.000 ₫</div>
     </div>
 
     <div class="panel">
       <div class="panel-top">
-        <div class="panel-title">Chi tiết các khoản Thu / Chi</div>
-        <div class="sub-stat" id="summaryLine">Đang tải từ Code.gs...</div>
+        <h2>Chi tiết các khoản Thu / Chi</h2>
+        <div class="stats-meta" id="statsMeta">131 khoản · Tổng: 125.406.767 ₫</div>
       </div>
 
-      <div class="filters" id="filterBar">
-        <button class="btn-filter active" data-filter="ALL">Tất cả</button>
-        <button class="btn-filter" data-filter="THU">Khoản Thu</button>
-        <button class="btn-filter" data-filter="CHI">Khoản Chi</button>
-        <button class="btn-filter" data-filter="VETC">VETC</button>
-        <button class="btn-filter" data-filter="SAC">Sạc pin</button>
-        <button class="btn-filter" data-filter="KHAC">Khác</button>
+      <div class="chip-row" id="categoryChips">
+        <button type="button" class="btn active" data-tab="ALL">Tất cả</button>
+        <button type="button" class="btn" data-tab="THU">Khoản Thu</button>
+        <button type="button" class="btn" data-tab="CHI">Khoản Chi</button>
+        <button type="button" class="btn" data-tab="VETC">VETC</button>
+        <button type="button" class="btn" data-tab="CHARGE">Sạc pin</button>
+        <button type="button" class="btn" data-tab="OTHER">Khác</button>
+      </div>
+
+      <div class="time-filter-box">
+        <div class="time-field">
+          <label for="filterFromDate">Từ ngày</label>
+          <input type="date" id="filterFromDate" />
+        </div>
+
+        <div class="time-field">
+          <label for="filterToDate">Đến ngày</label>
+          <input type="date" id="filterToDate" />
+        </div>
+
+        <div class="time-field">
+          <label for="filterMonth">Tháng</label>
+          <select id="filterMonth">
+            <option value="">Tất cả tháng</option>
+            <option value="01">Tháng 01</option>
+            <option value="02">Tháng 02</option>
+            <option value="03">Tháng 03</option>
+            <option value="04">Tháng 04</option>
+            <option value="05">Tháng 05</option>
+            <option value="06">Tháng 06</option>
+            <option value="07">Tháng 07</option>
+            <option value="08">Tháng 08</option>
+            <option value="09">Tháng 09</option>
+            <option value="10">Tháng 10</option>
+            <option value="11">Tháng 11</option>
+            <option value="12">Tháng 12</option>
+          </select>
+        </div>
+
+        <div class="time-field">
+          <label for="filterYear">Năm</label>
+          <select id="filterYear">
+            <option value="">Tất cả năm</option>
+            <option value="2026" selected>2026</option>
+            <option value="2025">2025</option>
+            <option value="2027">2027</option>
+          </select>
+        </div>
+
+        <button type="button" class="btn" id="resetTimeBtn">Xóa lọc ngày</button>
       </div>
 
       <input
         type="text"
-        id="searchInput"
         class="search-input"
-        placeholder="Tìm theo nội dung, ngày, danh mục, hình thức hoặc số tiền..."
+        id="searchInput"
+        placeholder="Tìm theo nội dung, ngày (vd: 02/11 hoặc 18/11/2026), danh mục, hình thức hoặc số tiền..."
       />
 
       <div class="table-wrap">
@@ -146,141 +378,448 @@
               <th>Loại</th>
               <th>Danh mục</th>
               <th>Nội dung</th>
-              <th style="text-align:right;">Số tiền</th>
+              <th class="num">Số tiền</th>
             </tr>
           </thead>
-          <tbody id="txBody">
-            <tr><td colspan="6" style="text-align:center;color:#5a6b61;padding:18px;">Đang lấy dữ liệu từ Code.gs...</td></tr>
-          </tbody>
+          <tbody id="ledgerBody"></tbody>
         </table>
       </div>
-    </div>
 
-    <div class="share-box">
-      <strong>Link mở trên điện thoại &amp; gửi người thân</strong>
-      <span>https://kietta130881.github.io/KIETTA/</span>
+      <div class="footer-note">
+        <span>Link mở trên điện thoại &amp; gửi người thân: <a href="https://kietta130881.github.io/KIETTA/" target="_blank" rel="noopener">https://kietta130881.github.io/KIETTA/</a></span>
+        <span id="syncStamp">Đã đồng bộ dữ liệu sổ lúc 24/11/2026 09:32:00 (131 dòng).</span>
+      </div>
     </div>
-
-    <p class="status-note" id="syncStatus">
-      Đang kết nối tới Code.gs...
-    </p>
   </div>
 
   <script>
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbymiRccSimgcBN5NU6OadwjRtgkB-yfCyuujX-xUMHWAftLaTKDBreuvd5dgJlhqHwY_Q/exec";
+    // Tùy chọn: điền URL Web App Apps Script (doGet trả JSON mảng bản ghi) nếu muốn đồng bộ trực tiếp khi bấm "Cập nhật lại"
+    const APPS_SCRIPT_URL = "";
 
-    let transactions = [];
-    let activeFilter = "ALL";
+    const INITIAL_ROWS = [
+      { stt: 1, date: "30/10/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí dán thẻ VETC xe 50F20703V (Giao dịch lúc 11:47 (VETC xe 50F20703V))", amount: -118000 },
+      { stt: 2, date: "02/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Becamex Vĩnh Phú (Giao dịch lúc 18:32)", amount: -14727 },
+      { stt: 3, date: "02/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Becamex Suối Giữa (Giao dịch lúc 19:01)", amount: -14727 },
+      { stt: 4, date: "02/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Becamex Suối Giữa (Giao dịch lúc 19:30)", amount: -14727 },
+      { stt: 5, date: "02/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Genimex trạm số 1 (Giao dịch lúc 19:53)", amount: -9818 },
+      { stt: 6, date: "02/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Truy thu phí đoạn Biên Hòa - Vũng Tàu - Phan Thiết - Dầu Giây (Giao dịch lúc 20:58)", amount: -40654 },
+      { stt: 7, date: "02/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua đoạn Phan Thiết - Dầu Giây - Nút giao TL765 Km69+400 (Giao dịch lúc 21:14)", amount: -38480 },
+      { stt: 8, date: "02/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua đoạn Nút giao TL765 Km69+400 - Phan Thiết - Dầu Giây (Giao dịch lúc 23:01)", amount: -38480 },
+      { stt: 9, date: "02/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua đoạn Phan Thiết - Dầu Giây - Long Phước (Giao dịch lúc 23:28)", amount: -86047 },
+      { stt: 10, date: "03/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí bãi đỗ Cảng quốc tế - Tân Sơn Nhất (13:31 - 14:02) (Giao dịch lúc 14:03 (Bãi đỗ Tân Sơn Nhất))", amount: -14000 },
+      { stt: 11, date: "03/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Cầu Rạch Miễu (Giao dịch lúc 18:50)", amount: -19000 },
+      { stt: 12, date: "03/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Cầu Mỹ Lợi (Giao dịch lúc 21:13)", amount: -40000 },
+      { stt: 13, date: "04/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Thanh toán đơn hàng ĐVCNTT CTCPGTSVN (VDTC) (Giao dịch lúc 13:47)", amount: -35000 },
+      { stt: 14, date: "04/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua đoạn Thân Cửu Nghĩa - An Thái Trung (Giao dịch lúc 15:55)", amount: -116301 },
+      { stt: 15, date: "06/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Cầu Cổ Chiên (Giao dịch lúc 04:41)", amount: -40000 },
+      { stt: 16, date: "06/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm An Sương An Lạc (Giao dịch lúc 06:33)", amount: -14000 },
+      { stt: 17, date: "06/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm An Sương An Lạc (Giao dịch lúc 08:39)", amount: -14000 },
+      { stt: 18, date: "06/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Cầu Cổ Chiên (Giao dịch lúc 10:56)", amount: -40000 },
+      { stt: 19, date: "07/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua đoạn An Thái Trung - Thân Cửu Nghĩa (Giao dịch lúc 02:01)", amount: -116301 },
+      { stt: 20, date: "07/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí bãi đỗ Cảng quốc tế - Tân Sơn Nhất (03:09 - 03:16) (Giao dịch lúc 03:17 (Bãi đỗ Tân Sơn Nhất))", amount: -9000 },
+      { stt: 21, date: "08/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Chơn Thành (Giao dịch lúc 14:10)", amount: -14000 },
+      { stt: 22, date: "08/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Số 2 Km957 QL14 (Giao dịch lúc 23:11)", amount: -40000 },
+      { stt: 23, date: "09/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Số 2 Km957 QL14 (Giao dịch lúc 03:35)", amount: -40000 },
+      { stt: 24, date: "09/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Tân Lập (Giao dịch lúc 04:03)", amount: -14000 },
+      { stt: 25, date: "09/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Tân Lập (Giao dịch lúc 12:32)", amount: -14000 },
+      { stt: 26, date: "09/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Số 2 Km957 QL14 (Giao dịch lúc 13:06)", amount: -40000 },
+      { stt: 27, date: "09/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Số 2 Km957 QL14 (Giao dịch lúc 13:33)", amount: -40000 },
+      { stt: 28, date: "09/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Tân Lập (Giao dịch lúc 19:09)", amount: -14000 },
+      { stt: 29, date: "09/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí bãi đỗ Cảng quốc tế - Tân Sơn Nhất (21:10 - 21:22) (Giao dịch lúc 21:23 (Bãi đỗ Tân Sơn Nhất))", amount: -14000 },
+      { stt: 30, date: "11/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua đoạn Long Phước - Phan Thiết - Dầu Giây (Giao dịch lúc 02:29)", amount: -86047 },
+      { stt: 31, date: "11/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua đoạn Phan Thiết - Dầu Giây - Nút giao Đại Ninh Km178+655 (Giao dịch lúc 04:17)", amount: -179066 },
+      { stt: 32, date: "11/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua đoạn Nút giao Đại Ninh Km178+655 - Km133+770 (Giao dịch lúc 06:16)", amount: -40189 },
+      { stt: 33, date: "11/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua đoạn Km133+770 - KM05 (Giao dịch lúc 07:54)", amount: -211904 },
+      { stt: 34, date: "11/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua đoạn KM05 - Nút giao QL.26 Km1386+100 (Giao dịch lúc 08:20)", amount: -32625 },
+      { stt: 35, date: "11/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Khánh Hòa (Giao dịch lúc 08:21)", amount: -28000 },
+      { stt: 36, date: "11/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Khánh Hòa (Giao dịch lúc 08:24)", amount: -28000 },
+      { stt: 37, date: "11/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua đoạn Nút giao QL.26 Km1386+100 - Trạm nút giao Km1344+500 (Giao dịch lúc 08:56)", amount: -37440 },
+      { stt: 38, date: "11/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Hầm Đèo Cả (Giao dịch lúc 09:12)", amount: -108000 },
+      { stt: 39, date: "12/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Đắk Lắk (Giao dịch lúc 09:13)", amount: -28000 },
+      { stt: 40, date: "12/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Đắk Nông (Giao dịch lúc 12:44)", amount: -39000 },
+      { stt: 41, date: "12/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Đắk Song (Giao dịch lúc 13:59)", amount: -34000 },
+      { stt: 42, date: "12/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Cai Chanh (Giao dịch lúc 15:17)", amount: -34000 },
+      { stt: 43, date: "12/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Số 2 Km957 QL14 (Giao dịch lúc 17:06)", amount: -40000 },
+      { stt: 44, date: "12/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Tân Lập (Giao dịch lúc 17:41)", amount: -14000 },
+      { stt: 45, date: "12/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm DT741 (Giao dịch lúc 18:13)", amount: -14500 },
+      { stt: 46, date: "12/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Becamex Suối Giữa (Giao dịch lúc 18:53)", amount: -14727 },
+      { stt: 47, date: "12/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Cầu Phú Cường (Giao dịch lúc 19:03 (Số dư cuối kỳ VETC: 791.955đ))", amount: -9818 },
+      { stt: 48, date: "13/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc VinFast - VIN RLLVFPNT6TH745962 (21:08) (Thanh toán ứng dụng VinFast)", amount: -235299 },
+      { stt: 49, date: "15/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc VinFast - VIN RLLVFPNT6TH745962 (06:57) (Thanh toán ứng dụng VinFast)", amount: -186959 },
+      { stt: 50, date: "16/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc VinFast - VIN RLLVFPNT6TH745962 (06:31) (Thanh toán ứng dụng VinFast)", amount: -224536 },
+      { stt: 51, date: "17/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc VinFast - VIN RLLVFPNT6TH745962 (07:06) (Thanh toán ứng dụng VinFast)", amount: -149305 },
+      { stt: 52, date: "18/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc VinFast - VIN RLLVFPNT6TH745962 (06:12) (Thanh toán ứng dụng VinFast)", amount: -133024 },
+      { stt: 53, date: "18/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc VinFast - VIN RLLVFPNT6TH745962 (21:13) (Thanh toán ứng dụng VinFast)", amount: -192476 },
+      { stt: 54, date: "20/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc VinFast - VIN RLLVFPNT6TH745962 (06:26) (Thanh toán ứng dụng VinFast)", amount: -183718 },
+      { stt: 55, date: "20/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc VinFast - VIN RLLVFPNT6TH745962 (06:26) (Thanh toán ứng dụng VinFast)", amount: -15818 },
+      { stt: 56, date: "20/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc VinFast - VIN RLLVFPNT6TH745962 (06:26) (Thanh toán ứng dụng VinFast)", amount: -160879 },
+      { stt: 57, date: "20/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc VinFast - VIN RLLVFPNT6TH745962 (06:26) (Thanh toán ứng dụng VinFast)", amount: -79822 },
+      { stt: 58, date: "21/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc VinFast - VIN RLLVFPNT6TH745962 (06:46) (Thanh toán ứng dụng VinFast)", amount: -178934 },
+      { stt: 59, date: "21/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc VinFast - VIN RLLVFPNT6TH745962 (06:46) (Thanh toán ứng dụng VinFast)", amount: -104166 },
+      { stt: 60, date: "22/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc VinFast - VIN RLLVFPNT6TH745962 (22:05) (Thanh toán ứng dụng VinFast)", amount: -149690 },
+      { stt: 61, date: "22/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc VinFast - VIN RLLVFPNT6TH745962 (22:05) (Thanh toán ứng dụng VinFast)", amount: -39352 },
+      { stt: 62, date: "23/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc VinFast - VIN RLLVFPNT6TH745962 (19:31) (Thanh toán ứng dụng VinFast)", amount: -73186 },
+      { stt: 63, date: "23/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc VinFast - VIN RLLVFPNT6TH745962 (19:31) (Thanh toán ứng dụng VinFast)", amount: -89583 },
+      { stt: 64, date: "23/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc VinFast - VIN RLLVFPNT6TH745962 (19:31) (Thanh toán ứng dụng VinFast)", amount: -199381 },
+      { stt: 65, date: "24/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc VinFast - VIN RLLVFPNT6TH745962 (06:47) (Thanh toán ứng dụng VinFast)", amount: -164814 },
+      { stt: 66, date: "23/10/2026", type: "Chi", category: "Khác", note: "Mua phụ kiện xe: Ốp chìa khóa xe VinFast VF5/MPV7/Limo (Shop nvf5_rzlxe) (Mã đơn 26102053R2UN1G - ShopeePay)", amount: -134204 },
+      { stt: 67, date: "29/10/2026", type: "Chi", category: "Khác", note: "Mua phụ kiện xe: Ốp bảo vệ điều hòa ô tô VinFast Limo Green (Shop Lamicar) (Mã đơn 261028S5Y7GFG5 - ShopeePay)", amount: -119800 },
+      { stt: 68, date: "30/10/2026", type: "Chi", category: "Khác", note: "Mua phụ kiện xe: Vè che mưa & bộ 4 chắn bùn ô tô VinFast Limo Green (Shop Phukien4banh) (Đơn Shopee)", amount: -428640 },
+      { stt: 69, date: "31/10/2026", type: "Chi", category: "Khác", note: "Mua nội thất xe: Thảm taplo & bộ thảm lót cốp Carbon Đen Đỏ VinFast Limo Green (Shop Zkapet - Phụ kiện Ô Tô) (Đơn Shopee (tặng kèm ví da đựng giấy tờ))", amount: -1310400 },
+      { stt: 70, date: "24/11/2026", type: "Chi", category: "Khác", note: "Mua phụ kiện xe: Khánh treo xe gỗ Bách Xanh 4x6cm - combo 4 sản phẩm (Shop THIÊN MỘC BÁO) (Đơn Shopee Đã giao (chưa có ngày giao cụ thể trên ảnh))", amount: -106306 },
+      { stt: 71, date: "24/11/2026", type: "Chi", category: "Khác", note: "Mua phụ kiện xe: Nước hoa ô tô cao cấp GOCADO - Black Diamond (Shop NƯỚC HOA Ô TÔ SHOP) (Đơn Shopee Đã giao (chưa có ngày giao cụ thể trên ảnh))", amount: -310700 },
+      { stt: 48, date: "14/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Becamex Vĩnh Phú (Giờ GD: 14:15:53 (Số dư VETC: 777.228đ))", amount: -14727 },
+      { stt: 49, date: "14/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Chơn Thành (Giờ GD: 15:39:20 (Số dư VETC: 763.228đ))", amount: -14000 },
+      { stt: 50, date: "14/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Tân Khai (Giờ GD: 16:04:48 (Số dư VETC: 749.228đ))", amount: -14000 },
+      { stt: 51, date: "14/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Thanh Lương (Giờ GD: 16:27:02 (Số dư VETC: 735.228đ))", amount: -14000 },
+      { stt: 52, date: "14/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Thanh Lương (Giờ GD: 17:21:35 (Số dư VETC: 721.228đ))", amount: -14000 },
+      { stt: 53, date: "14/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Tân Khai (Giờ GD: 17:46:56 (Số dư VETC: 707.228đ))", amount: -14000 },
+      { stt: 54, date: "14/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Chơn Thành (Giờ GD: 23:21:44 (Số dư VETC: 693.228đ))", amount: -14000 },
+      { stt: 55, date: "15/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm An Sương An Lạc (Giờ GD: 02:59:47 (Số dư VETC: 679.228đ))", amount: -14000 },
+      { stt: 56, date: "16/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Bến Lức (Giờ GD: 03:49:54 (Số dư VETC: 650.228đ))", amount: -29000 },
+      { stt: 57, date: "17/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí bãi đỗ Nhà ga T3 - Tân Sơn Nhất (21:22 - 21:22) (Giờ GD: 21:24:26 (Số dư VETC: 641.228đ))", amount: -9000 },
+      { stt: 58, date: "18/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua đoạn Long Phước - Dầu Giây (Giờ GD: 04:56:13 (Số dư VETC: 529.102đ))", amount: -112126 },
+      { stt: 59, date: "18/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua đoạn Dầu Giây - Long Phước (Giờ GD: 12:03:47 (Số dư VETC: 416.976đ))", amount: -112126 },
+      { stt: 60, date: "19/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm An Sương An Lạc (Giờ GD: 08:06:02 (Số dư VETC: 402.976đ))", amount: -14000 },
+      { stt: 61, date: "20/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua đoạn Long Phước - Phan Thiết - Dầu Giây (Giờ GD: 14:21:01 (Số dư VETC: 413.953đ; sau nạp MBBank +97.024đ lúc 07:14))", amount: -86047 },
+      { stt: 62, date: "20/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua đoạn Phan Thiết - Dầu Giây - Nút giao Đại Ninh Km178+655 (Giờ GD: 15:53:57 (Số dư VETC: 234.887đ))", amount: -179066 },
+      { stt: 63, date: "20/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Định An (Giờ GD: 18:36:31 (Số dư VETC: 705.887đ; sau nạp MBBank +500.000đ lúc 16:06))", amount: -29000 },
+      { stt: 64, date: "21/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Định An (Giờ GD: 15:37:39 (Số dư VETC: 676.887đ))", amount: -29000 },
+      { stt: 65, date: "21/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua đoạn Nút giao Đại Ninh Km178+655 - Phan Thiết - Dầu Giây (Giờ GD: 20:09:29 (Số dư VETC: 497.821đ))", amount: -179066 },
+      { stt: 66, date: "21/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua đoạn Phan Thiết - Dầu Giây - Long Phước (Giờ GD: 20:42:58 (Số dư VETC: 411.774đ))", amount: -86047 },
+      { stt: 67, date: "22/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Cầu Cổ Chiên (Giờ GD: 08:35:35 (Số dư VETC: 460.000đ; sau nạp MBBank +88.226đ lúc 07:33))", amount: -40000 },
+      { stt: 68, date: "22/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Cai Lậy - QL1 (Giờ GD: 23:49:08 (Số dư VETC: 446.000đ))", amount: -14000 },
+      { stt: 69, date: "23/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm An Sương An Lạc (Giờ GD: 05:02:28 (Số dư VETC: 432.000đ))", amount: -14000 },
+      { stt: 70, date: "23/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm An Sương An Lạc (Giờ GD: 08:05:27 (Số dư VETC: 418.000đ))", amount: -14000 },
+      { stt: 71, date: "23/11/2026", type: "Chi", category: "Phí cầu đường/VETC", note: "Phí qua trạm Cai Lậy - QL1 (Giờ GD: 17:38:44 (Số dư VETC: 404.000đ))", amount: -14000 },
+      { stt: 72, date: "23/10/2026", type: "Chi", category: "Khác", note: "Mua phụ kiện xe Shopee: Ốp chìa khóa xe VinFast VF5/Limo Green (Shop nvf5_rzlxe) (Mã ĐH: 26102053R2UN1G - TK Ngân hàng liên kết ShopeePay)", amount: -134204 },
+      { stt: 73, date: "29/10/2026", type: "Chi", category: "Khác", note: "Mua phụ kiện xe Shopee: Ốp bảo vệ điều hòa ô tô VinFast Limo Green Carbon Đỏ (Shop Lamicar) (Mã ĐH: 261028S5Y7GFG5 - TK Ngân hàng liên kết ShopeePay)", amount: -119800 },
+      { stt: 74, date: "30/10/2026", type: "Chi", category: "Khác", note: "Mua phụ kiện xe Shopee: Vè che mưa 6 chi tiết + Bộ 4 chắn bùn VinFast Limo Green (Shop Phukien4banh) (Vận chuyển GHN: GYMTTGYG)", amount: -428640 },
+      { stt: 75, date: "31/10/2026", type: "Chi", category: "Khác", note: "Mua phụ kiện xe Shopee: Thảm Taplo tuyết nhung + Bộ thảm lót cốp C2.2 Carbon Đen Đỏ VinFast Limo Green (Shop Zkapet) (Tặng kèm ví da đựng đăng kiểm - SPX: SPXVN06496756618A)", amount: -1310400 },
+      { stt: 76, date: "24/11/2026", type: "Chi", category: "Khác", note: "Mua phụ kiện xe Shopee: Khánh treo xe gỗ bách xanh 4x6cm + 3 sản phẩm khác (Shop THIÊN MỘC BÁO) (Đơn đã giao hoàn thành trên mục Đơn đã mua (4 sản phẩm))", amount: -106306 },
+      { stt: 77, date: "24/11/2026", type: "Chi", category: "Khác", note: "Mua phụ kiện xe Shopee: Nước hoa ô tô cao cấp GOCADO - BLACK DIAMOND (NƯỚC HOA Ô TÔ SHOP) (Đơn đã giao hoàn thành trên mục Đơn đã mua (1 sản phẩm))", amount: -310700 },
+      { stt: 78, date: "13/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc pin (VIN RLLVFPNT6TH745962) (Giờ GD: 21:08)", amount: -235299 },
+      { stt: 79, date: "15/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc pin (VIN RLLVFPNT6TH745962) (Giờ GD: 06:57)", amount: -186959 },
+      { stt: 80, date: "16/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc pin (VIN RLLVFPNT6TH745962) (Giờ GD: 06:31)", amount: -224536 },
+      { stt: 81, date: "17/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc pin (VIN RLLVFPNT6TH745962) (Giờ GD: 07:06)", amount: -149305 },
+      { stt: 82, date: "18/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc pin (VIN RLLVFPNT6TH745962) (Giờ GD: 06:12)", amount: -133024 },
+      { stt: 83, date: "18/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc pin (VIN RLLVFPNT6TH745962) (Giờ GD: 21:13)", amount: -192476 },
+      { stt: 84, date: "20/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc pin (VIN RLLVFPNT6TH745962) (Giờ GD: 06:26 (1/4 lần ghi nhận cùng mốc 06:26))", amount: -15818 },
+      { stt: 85, date: "20/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc pin (VIN RLLVFPNT6TH745962) (Giờ GD: 06:26 (2/4 lần ghi nhận cùng mốc 06:26))", amount: -79822 },
+      { stt: 86, date: "20/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc pin (VIN RLLVFPNT6TH745962) (Giờ GD: 06:26 (3/4 lần ghi nhận cùng mốc 06:26))", amount: -160879 },
+      { stt: 87, date: "20/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc pin (VIN RLLVFPNT6TH745962) (Giờ GD: 06:26 (4/4 lần ghi nhận cùng mốc 06:26))", amount: -183718 },
+      { stt: 88, date: "21/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc pin (VIN RLLVFPNT6TH745962) (Giờ GD: 06:46 (1/2 lần ghi nhận cùng mốc 06:46))", amount: -104166 },
+      { stt: 89, date: "21/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc pin (VIN RLLVFPNT6TH745962) (Giờ GD: 06:46 (2/2 lần ghi nhận cùng mốc 06:46))", amount: -178934 },
+      { stt: 90, date: "22/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc pin (VIN RLLVFPNT6TH745962) (Giờ GD: 22:05 (1/2 lần ghi nhận cùng mốc 22:05))", amount: -39352 },
+      { stt: 91, date: "22/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc pin (VIN RLLVFPNT6TH745962) (Giờ GD: 22:05 (2/2 lần ghi nhận cùng mốc 22:05))", amount: -149690 },
+      { stt: 92, date: "23/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc pin (VIN RLLVFPNT6TH745962) (Giờ GD: 19:31 (1/3 lần ghi nhận cùng mốc 19:31))", amount: -73186 },
+      { stt: 93, date: "23/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc pin (VIN RLLVFPNT6TH745962) (Giờ GD: 19:31 (2/3 lần ghi nhận cùng mốc 19:31))", amount: -89583 },
+      { stt: 94, date: "23/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc pin (VIN RLLVFPNT6TH745962) (Giờ GD: 19:31 (3/3 lần ghi nhận cùng mốc 19:31))", amount: -199381 },
+      { stt: 95, date: "24/11/2026", type: "Chi", category: "Sạc điện/Nhiên liệu", note: "Dịch vụ sạc pin (VIN RLLVFPNT6TH745962) (Giờ GD: 06:47)", amount: -164814 },
+      { stt: 96, date: "03/11/2026", type: "Thu", category: "Doanh thu dịch vụ/Lương", note: "Thu từ chạy dịch vụ (THAI ANH CUONG chuyển qua Zalo tới THAI ANH KIET - MB 0907763185) (Mã GD: FT26307828680090 | 13:02 (khớp biến động số dư +1.450.000đ trên TK 09xxx185))", amount: 1450000 },
+      { stt: 97, date: "04/11/2026", type: "Thu", category: "Doanh thu dịch vụ/Lương", note: "Thu từ chạy dịch vụ (THAI ANH CUONG chuyển qua Zalo tới THAI ANH KIET - MB 0907763185) (Mã GD: FT26308735955803 | 09:48 (khớp biến động số dư +1.600.000đ trên TK 09xxx185))", amount: 1600000 },
+      { stt: 98, date: "07/11/2026", type: "Thu", category: "Doanh thu dịch vụ/Lương", note: "Thu từ chạy dịch vụ (chuyển qua Zalo tới THAI QUOC TUAN - VPBank 0937268550) (Mã GD: FT26311044952361 | 17:37 - Thai Cuong ck qua Zalo)", amount: 5000000 },
+      { stt: 99, date: "15/11/2026", type: "Thu", category: "Doanh thu dịch vụ/Lương", note: "Thu từ chạy dịch vụ (chuyển qua Zalo tới THAI QUOC TUAN - VPBank 0937268550) (Mã GD: FT26320259522208 | 06:22 - Thai Cuong ck qua Zalo)", amount: 1500000 },
+      { stt: 100, date: "16/11/2026", type: "Thu", category: "Doanh thu dịch vụ/Lương", note: "Thu từ chạy dịch vụ (chuyển qua Zalo tới THAI QUOC TUAN - VPBank 0937268550) (Mã GD: FT26320888140339 | 06:51 - Thai Cuong ck qua Zalo)", amount: 1800000 },
+      { stt: 101, date: "18/11/2026", type: "Thu", category: "Doanh thu dịch vụ/Lương", note: "Thu từ chạy dịch vụ (chuyển qua Zalo tới THAI QUOC TUAN - VPBank 0937268550) (Mã GD: FT26322064088063 | 14:10 - Thai Cuong ck qua Zalo)", amount: 3500000 },
+      { stt: 102, date: "18/11/2026", type: "Thu", category: "Doanh thu dịch vụ/Lương", note: "Thu từ chạy dịch vụ (chuyển qua Zalo tới THAI QUOC TUAN - VPBank 0937268550) (Mã GD: FT263222749720362 | 18:41 - Thai Cuong ck qua Zalo)", amount: 1000000 },
+      { stt: 103, date: "20/11/2026", type: "Thu", category: "Doanh thu dịch vụ/Lương", note: "Thu từ chạy dịch vụ (chuyển qua Zalo tới THAI QUOC TUAN - VPBank 0937268550) (Mã GD: FT26324719744536 | 19:22 - Thai Cuong ck qua Zalo)", amount: 2000000 },
+      { stt: 104, date: "14/11/2026", type: "Thu", category: "Thu nhập khác", note: "Hoàn phí sạc pin miễn phí (BIDV chuyển tới THAI ANH KIET - MB 0907763185) (Số tham chiếu: 020097048811140955022026pvb4080524 | 14/11/2026 09:55:02)", amount: 1000000 },
+      { stt: 105, date: "28/10/2026", type: "Thu", category: "Thu nhập khác", note: "Tồn đầu kỳ từ cổ đông Thái Quốc Tuấn (ngày 28/10/2026) (Tồn đầu kỳ ghi nhận ngày 28/10/2026 từ Thái Quốc Tuấn (cổ đông))", amount: 62215000 },
+      { stt: 106, date: "26/10/2026", type: "Thu", category: "Thu nhập khác", note: "Cổ đông Thái Anh Kiệt góp/chuyển thu vào khoản 15.642.000đ (26/10/2026) (16:45 - BINH CHANH BRANCH-TAMPHON - Thẻ VISA 472674....9422)", amount: 15642000 },
+      { stt: 107, date: "26/10/2026", type: "Chi", category: "Khác", note: "Chi ra khoản 15.642.000đ tại BINH CHANH BRANCH-TAMPHON (cổ đông Thái Anh Kiệt) (26/10/2026 16:45 - Thẻ VISA 472674....9422)", amount: -15642000 }
+    ];
 
-    const txBody = document.getElementById("txBody");
-    const summaryLine = document.getElementById("summaryLine");
-    const searchInput = document.getElementById("searchInput");
-    const syncStatus = document.getElementById("syncStatus");
-    const sumThuEl = document.getElementById("sumThu");
-    const sumChiEl = document.getElementById("sumChi");
-    const sumBalanceEl = document.getElementById("sumBalance");
-    const reloadBtn = document.getElementById("reloadBtn");
+    let rowsData = [...INITIAL_ROWS];
+    let activeTab = "ALL";
+    let latestState = { filtered: rowsData, sumThu: 0, sumChiAbs: 0, tonQuy: 0, sumAbsAll: 0 };
 
-    const fmtVnd = (n) => Number(n || 0).toLocaleString("vi-VN") + " ₫";
+    function parseDateObj(val) {
+      if (!val) return null;
+      const s = String(val).trim();
+      let m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+      if (m) return new Date(Number(m[3]), Number(m[2]) - 1, Number(m[1]));
+      m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+      if (m) return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+      return null;
+    }
 
-    function detectGroup(item) {
-      const cat = String(item.category || "").toLowerCase();
-      const desc = String(item.desc || "").toLowerCase();
-      if (cat.includes("vetc") || cat.includes("cầu đường") || desc.includes("vetc") || desc.includes("trạm")) {
-        return "VETC";
+    function fmtMoney(n) {
+      return `${Math.round(n).toLocaleString("vi-VN")} ₫`;
+    }
+
+    function fmtSignedMoney(n) {
+      const absStr = Math.abs(Math.round(n)).toLocaleString("vi-VN");
+      return n >= 0 ? `+${absStr} ₫` : `-${absStr} ₫`;
+    }
+
+    function matchTab(row, tab) {
+      const cat = String(row.category || "").toLowerCase();
+      const type = String(row.type || "").toLowerCase();
+      if (tab === "ALL") return true;
+      if (tab === "THU") return type === "thu";
+      if (tab === "CHI") return type === "chi";
+      if (tab === "VETC") return cat.includes("vetc") || cat.includes("cầu đường");
+      if (tab === "CHARGE") return cat.includes("sạc") || cat.includes("nhiên liệu");
+      if (tab === "OTHER") return type === "chi" && !cat.includes("vetc") && !cat.includes("cầu đường") && !cat.includes("sạc") && !cat.includes("nhiên liệu");
+      return true;
+    }
+
+    function getFilterSummaryText() {
+      const fromVal = document.getElementById("filterFromDate").value;
+      const toVal = document.getElementById("filterToDate").value;
+      const monthVal = document.getElementById("filterMonth").value;
+      const yearVal = document.getElementById("filterYear").value;
+      const kw = document.getElementById("searchInput").value.trim();
+
+      const parts = [];
+      if (activeTab !== "ALL") parts.push(`Nhóm: ${activeTab}`);
+      if (fromVal || toVal) {
+        const f = fromVal ? fromVal.split("-").reverse().join("/") : "đầu kỳ";
+        const t = toVal ? toVal.split("-").reverse().join("/") : "cuối kỳ";
+        parts.push(`Từ ${f} đến ${t}`);
       }
-      if (cat.includes("sạc") || cat.includes("nhiên liệu") || desc.includes("sạc")) {
-        return "SAC";
-      }
-      return "KHAC";
+      if (monthVal) parts.push(`Tháng ${monthVal}`);
+      if (yearVal) parts.push(`Năm ${yearVal}`);
+      if (kw) parts.push(`Từ khóa "${kw}"`);
+
+      return parts.length ? parts.join(" · ") : "Tất cả thời gian & danh mục";
+    }
+
+    function getFilteredRows() {
+      const fromDate = parseDateObj(document.getElementById("filterFromDate").value);
+      const toDate = parseDateObj(document.getElementById("filterToDate").value);
+      const monthVal = document.getElementById("filterMonth").value;
+      const yearVal = document.getElementById("filterYear").value;
+      const keyword = document.getElementById("searchInput").value.trim().toLowerCase();
+
+      return rowsData.filter((r) => {
+        if (!matchTab(r, activeTab)) return false;
+
+        const d = parseDateObj(r.date);
+        if (!d) return false;
+
+        if (fromDate && d < fromDate) return false;
+        if (toDate && d > toDate) return false;
+
+        if (monthVal) {
+          const mStr = String(d.getMonth() + 1).padStart(2, "0");
+          if (mStr !== monthVal) return false;
+        }
+
+        if (yearVal) {
+          const yStr = String(d.getFullYear());
+          if (yStr !== yearVal) return false;
+        }
+
+        if (keyword) {
+          const blob = `${r.stt} ${r.date} ${r.type} ${r.category} ${r.note} ${r.amount}`.toLowerCase();
+          if (!blob.includes(keyword)) return false;
+        }
+
+        return true;
+      });
     }
 
     function render() {
-      const q = searchInput.value.trim().toLowerCase();
-      const filtered = transactions.filter((item) => {
-        if (activeFilter === "THU" && item.type !== "Thu") return false;
-        if (activeFilter === "CHI" && item.type !== "Chi") return false;
-        if (["VETC", "SAC", "KHAC"].includes(activeFilter) && detectGroup(item) !== activeFilter) return false;
-        if (!q) return true;
-        return (
-          String(item.stt).toLowerCase().includes(q) ||
-          String(item.date).toLowerCase().includes(q) ||
-          String(item.type).toLowerCase().includes(q) ||
-          String(item.category).toLowerCase().includes(q) ||
-          String(item.desc).toLowerCase().includes(q) ||
-          String(item.note).toLowerCase().includes(q) ||
-          String(item.amount).includes(q.replace(/\D/g, ""))
-        );
-      });
+      const filtered = getFilteredRows();
+      const tbody = document.getElementById("ledgerBody");
 
-      const totalFiltered = filtered.reduce((acc, cur) => acc + Number(cur.amount || 0), 0);
-      summaryLine.textContent = `${filtered.length} khoản · Tổng: ${fmtVnd(totalFiltered)}`;
+      let sumThu = 0;
+      let sumChiAbs = 0;
+      let sumAbsAll = 0;
 
-      if (!filtered.length) {
-        txBody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:#5a6b61;padding:18px;">Không có giao dịch phù hợp.</td></tr>`;
-        return;
-      }
+      tbody.innerHTML = filtered.map((r) => {
+        const amt = Number(r.amount) || 0;
+        if (r.type === "Thu" || amt > 0) {
+          sumThu += Math.abs(amt);
+        } else {
+          sumChiAbs += Math.abs(amt);
+        }
+        sumAbsAll += Math.abs(amt);
 
-      txBody.innerHTML = filtered.map((item) => {
-        const isThu = item.type === "Thu";
-        const extraNote = item.note ? ` <span style="color:#5a6b61;font-size:12px;">(${item.note})</span>` : "";
+        const badgeClass = r.type === "Thu" ? "badge-thu" : "badge-chi";
+        const amountColor = r.type === "Thu" ? "val-thu" : "val-chi";
+
         return `
           <tr>
-            <td>${item.stt}</td>
-            <td style="white-space:nowrap;">${item.date}</td>
-            <td><span class="badge ${isThu ? "thu" : "chi"}">${item.type}</span></td>
-            <td>${item.category}</td>
-            <td>${item.desc}${extraNote}</td>
-            <td class="${isThu ? "amt-thu" : "amt-chi"}">${isThu ? "+" : "-"}${fmtVnd(item.amount)}</td>
+            <td>${r.stt}</td>
+            <td>${r.date}</td>
+            <td><span class="badge ${badgeClass}">${r.type}</span></td>
+            <td>${r.category}</td>
+            <td>${r.note}</td>
+            <td class="num ${amountColor}">${fmtSignedMoney(amt)}</td>
           </tr>
         `;
       }).join("");
+
+      const tonQuy = sumThu - sumChiAbs;
+      const scopeText = getFilterSummaryText();
+
+      document.getElementById("totalThu").textContent = fmtMoney(sumThu);
+      document.getElementById("totalChi").textContent = fmtMoney(sumChiAbs);
+      document.getElementById("totalTonQuy").textContent = fmtMoney(tonQuy);
+      document.getElementById("scopeThu").textContent = scopeText;
+      document.getElementById("scopeChi").textContent = scopeText;
+      document.getElementById("scopeTon").textContent = scopeText;
+      document.getElementById("statsMeta").textContent = `${filtered.length} khoản · Tổng: ${fmtMoney(sumAbsAll)}`;
+
+      latestState = { filtered, sumThu, sumChiAbs, tonQuy, sumAbsAll, scopeText };
     }
 
-    function applyPayload(data) {
-      if (!data || !Array.isArray(data.transactions)) return;
-      transactions = data.transactions;
-      if (data.summary) {
-        sumThuEl.textContent = fmtVnd(data.summary.totalThu);
-        sumChiEl.textContent = fmtVnd(data.summary.totalChi);
-        const bal = Number(data.summary.balance || 0);
-        sumBalanceEl.textContent = fmtVnd(bal);
-        sumBalanceEl.className = "val " + (bal >= 0 ? "pos" : "neg");
+    function wrapText(ctx, text, maxWidth) {
+      const words = String(text || "").split(" ");
+      const lines = [];
+      let line = "";
+      for (const word of words) {
+        const test = line ? `${line} ${word}` : word;
+        if (ctx.measureText(test).width > maxWidth && line) {
+          lines.push(line);
+          line = word;
+        } else {
+          line = test;
+        }
       }
-      syncStatus.textContent = `Đã tải trực tiếp từ Code.gs lúc ${data.updatedAt || "vừa xong"} (${transactions.length} dòng).`;
+      if (line) lines.push(line);
+      return lines;
+    }
+
+    function exportReportImage() {
+      const { filtered, sumThu, sumChiAbs, tonQuy, scopeText } = latestState;
+      const maxRowsInImage = 35;
+      const rowsToDraw = filtered.slice(0, maxRowsInImage);
+
+      const width = 1080;
+      const rowHeight = 36;
+      const headerHeight = 255;
+      const footerHeight = 65;
+      const height = headerHeight + rowsToDraw.length * rowHeight + footerHeight;
+
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
+
+      // Nền báo cáo
+      ctx.fillStyle = "#f4f6f9";
+      ctx.fillRect(0, 0, width, height);
+
+      // Khung tiêu đề
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(28, 24, width - 56, 110);
+      ctx.fillStyle = "#0f172a";
+      ctx.font = "bold 24px sans-serif";
+      ctx.fillText("BÁO CÁO THU CHI · XE 50F20703V", 48, 64);
+
+      ctx.fillStyle = "#475569";
+      ctx.font = "15px sans-serif";
+      ctx.fillText(`Bộ lọc: ${scopeText}  |  Số khoản: ${filtered.length}`, 48, 95);
+      ctx.fillText(`Số dư Ví VETC: ${document.getElementById("vetcBalance").textContent}`, 48, 118);
+
+      // 3 thẻ tổng quan theo bộ lọc
+      const cards = [
+        { label: "Tổng Thu", value: fmtMoney(sumThu), color: "#15803d" },
+        { label: "Tổng Chi", value: fmtMoney(sumChiAbs), color: "#b91c1c" },
+        { label: "Tồn Quỹ (Thu − Chi)", value: fmtMoney(tonQuy), color: "#0f172a" }
+      ];
+      const cardW = (width - 56 - 24) / 3;
+      cards.forEach((c, idx) => {
+        const x = 28 + idx * (cardW + 12);
+        const y = 144;
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(x, y, cardW, 74);
+        ctx.fillStyle = "#64748b";
+        ctx.font = "13px sans-serif";
+        ctx.fillText(c.label, x + 16, y + 26);
+        ctx.fillStyle = c.color;
+        ctx.font = "bold 20px sans-serif";
+        ctx.fillText(c.value, x + 16, y + 56);
+      });
+
+      // Bảng chi tiết
+      let y = 232;
+      ctx.fillStyle = "#0f766e";
+      ctx.fillRect(28, y, width - 56, 32);
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "bold 13px sans-serif";
+      ctx.fillText("Ngày", 42, y + 21);
+      ctx.fillText("Loại", 145, y + 21);
+      ctx.fillText("Nội dung", 215, y + 21);
+      ctx.fillText("Số tiền", width - 175, y + 21);
+
+      y += 32;
+      rowsToDraw.forEach((r, i) => {
+        ctx.fillStyle = i % 2 === 0 ? "#ffffff" : "#f8fafc";
+        ctx.fillRect(28, y, width - 56, rowHeight);
+
+        ctx.fillStyle = "#0f172a";
+        ctx.font = "13px sans-serif";
+        ctx.fillText(r.date || "", 42, y + 22);
+        ctx.fillText(r.type || "", 145, y + 22);
+
+        const wrappedNote = wrapText(ctx, r.note || "", width - 420)[0] || "";
+        ctx.fillText(wrappedNote, 215, y + 22);
+
+        const amt = Number(r.amount) || 0;
+        ctx.fillStyle = amt >= 0 ? "#15803d" : "#b91c1c";
+        ctx.font = "bold 13px sans-serif";
+        ctx.fillText(fmtSignedMoney(amt), width - 175, y + 22);
+
+        y += rowHeight;
+      });
+
+      ctx.fillStyle = "#64748b";
+      ctx.font = "12px sans-serif";
+      const noteMore = filtered.length > maxRowsInImage ? ` (Hiển thị ${maxRowsInImage}/${filtered.length} dòng đầu trên ảnh)` : "";
+      ctx.fillText(`Nguồn: Sổ Thu Chi Xe 50F20703V${noteMore}`, 28, height - 22);
+
+      const link = document.createElement("a");
+      const stamp = new Date().toISOString().slice(0, 10);
+      link.download = `Bao-cao-50F20703V-${stamp}.png`;
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    }
+
+    async function syncFromAppsScript() {
+      if (!APPS_SCRIPT_URL) {
+        render();
+        return;
+      }
+      const res = await fetch(`${APPS_SCRIPT_URL}${APPS_SCRIPT_URL.includes("?") ? "&" : "?"}t=${Date.now()}`);
+      const data = await res.json();
+      if (Array.isArray(data) && data.length) {
+        rowsData = data;
+      }
       render();
     }
 
-    function loadFromSheet() {
-      summaryLine.textContent = "Đang tải từ Code.gs...";
-      const cbName = "handleSheetData_" + Date.now();
-      const script = document.createElement("script");
-      window[cbName] = function(data) {
-        applyPayload(data);
-        delete window[cbName];
-        script.remove();
-      };
-      script.onerror = function() {
-        delete window[cbName];
-        script.remove();
-        syncStatus.textContent = "Không tải được dữ liệu từ Code.gs. Kiểm tra lại quyền truy cập Web App là 'Bất kỳ ai' (Anyone).";
-      };
-      script.src = `${APPS_SCRIPT_URL}${APPS_SCRIPT_URL.includes("?") ? "&" : "?"}callback=${cbName}&_=${Date.now()}`;
-      document.body.appendChild(script);
-    }
-
-    document.querySelectorAll(".btn-filter").forEach((btn) => {
+    document.querySelectorAll("#categoryChips .btn").forEach((btn) => {
       btn.addEventListener("click", () => {
-        document.querySelectorAll(".btn-filter").forEach((b) => b.classList.remove("active"));
+        document.querySelectorAll("#categoryChips .btn").forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
-        activeFilter = btn.dataset.filter;
+        activeTab = btn.dataset.tab || "ALL";
         render();
       });
     });
 
-    searchInput.addEventListener("input", render);
-    reloadBtn.addEventListener("click", loadFromSheet);
-    loadFromSheet();
+    ["filterFromDate", "filterToDate", "filterMonth", "filterYear", "searchInput"].forEach((id) => {
+      const el = document.getElementById(id);
+      el.addEventListener("change", render);
+      el.addEventListener("input", render);
+    });
+
+    document.getElementById("resetTimeBtn").addEventListener("click", () => {
+      document.getElementById("filterFromDate").value = "";
+      document.getElementById("filterToDate").value = "";
+      document.getElementById("filterMonth").value = "";
+      document.getElementById("filterYear").value = "";
+      render();
+    });
+
+    document.getElementById("exportImageBtn").addEventListener("click", exportReportImage);
+    document.getElementById("refreshBtn").addEventListener("click", syncFromAppsScript);
+
+    render();
   </script>
 </body>
 </html>
