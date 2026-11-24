@@ -43,13 +43,6 @@
     .card .val { font-size: 20px; font-weight: 700; }
     .val.pos { color: var(--green); }
     .val.neg { color: var(--red); }
-    .banner {
-      background: var(--green); color: #fff; border-radius: 14px;
-      padding: 14px 16px; display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 12px; gap: 10px;
-    }
-    .banner small { display: block; opacity: 0.92; font-size: 12px; margin-top: 2px; }
-    .banner .big { font-size: 21px; font-weight: 700; white-space: nowrap; }
     .panel {
       background: var(--card); border: 1px solid var(--border);
       border-radius: 14px; padding: 14px 16px; margin-bottom: 12px;
@@ -101,7 +94,7 @@
         <img src="https://kietta130881.github.io/KIETTA/SOTHUCHI.png" alt="Logo Sổ Thu Chi" />
         <div>
           <h1>Sổ Thu Chi · Xe 50F20703V</h1>
-          <p id="subtitleText">Đồng bộ trực tiếp Google Sheet · Xe 50F20703V</p>
+          <p>Dữ liệu lấy trực tiếp từ Apps Script (Code.gs) · Xe 50F20703V</p>
         </div>
       </div>
       <button class="btn-reload" id="reloadBtn" type="button">Cập nhật lại</button>
@@ -110,30 +103,22 @@
     <div class="grid">
       <div class="card">
         <div class="label">Tổng Thu</div>
-        <div class="val pos" id="sumThu">96.707.000 ₫</div>
+        <div class="val pos" id="sumThu">Đang tải...</div>
       </div>
       <div class="card">
         <div class="label">Tổng Chi</div>
-        <div class="val neg" id="sumChi">28.699.767 ₫</div>
+        <div class="val neg" id="sumChi">Đang tải...</div>
       </div>
       <div class="card">
         <div class="label">Tồn Quỹ (Thu − Chi)</div>
-        <div class="val pos" id="sumBalance">68.007.233 ₫</div>
+        <div class="val pos" id="sumBalance">Đang tải...</div>
       </div>
-    </div>
-
-    <div class="banner">
-      <div>
-        <strong>ĐỐI SOÁT VÍ VETC · XE 50F20703V</strong>
-        <small>Số dư thực tế Ví VETC (30/10/2026 – 23/11/2026)</small>
-      </div>
-      <div class="big">404.000 ₫</div>
     </div>
 
     <div class="panel">
       <div class="panel-top">
         <div class="panel-title">Chi tiết các khoản Thu / Chi</div>
-        <div class="sub-stat" id="summaryLine">Đang tải dữ liệu...</div>
+        <div class="sub-stat" id="summaryLine">Đang tải từ Code.gs...</div>
       </div>
 
       <div class="filters" id="filterBar">
@@ -142,14 +127,14 @@
         <button class="btn-filter" data-filter="CHI">Khoản Chi</button>
         <button class="btn-filter" data-filter="VETC">VETC</button>
         <button class="btn-filter" data-filter="SAC">Sạc pin</button>
-        <button class="btn-filter" data-filter="KHAC">Shopee / Khác</button>
+        <button class="btn-filter" data-filter="KHAC">Khác</button>
       </div>
 
       <input
         type="text"
         id="searchInput"
         class="search-input"
-        placeholder="Tìm theo nội dung, ngày (vd: 18/11/2026), danh mục, hình thức hoặc số tiền..."
+        placeholder="Tìm theo nội dung, ngày, danh mục, hình thức hoặc số tiền..."
       />
 
       <div class="table-wrap">
@@ -165,7 +150,7 @@
             </tr>
           </thead>
           <tbody id="txBody">
-            <tr><td colspan="6" style="text-align:center;color:#5a6b61;padding:18px;">Đang tải dữ liệu từ Google Sheet...</td></tr>
+            <tr><td colspan="6" style="text-align:center;color:#5a6b61;padding:18px;">Đang lấy dữ liệu từ Code.gs...</td></tr>
           </tbody>
         </table>
       </div>
@@ -177,7 +162,7 @@
     </div>
 
     <p class="status-note" id="syncStatus">
-      Nguồn dữ liệu: Google Sheet Sổ Thu Chi Hàng Ngày. Khi bạn thêm/xóa dòng trên Sheet hoặc nhờ cập nhật, bấm &ldquo;Cập nhật lại&rdquo; hoặc tải lại trang để xem số liệu mới.
+      Đang kết nối tới Code.gs...
     </p>
   </div>
 
@@ -232,7 +217,7 @@
       summaryLine.textContent = `${filtered.length} khoản · Tổng: ${fmtVnd(totalFiltered)}`;
 
       if (!filtered.length) {
-        txBody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:#5a6b61;padding:18px;">Không tìm thấy giao dịch phù hợp.</td></tr>`;
+        txBody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:#5a6b61;padding:18px;">Không có giao dịch phù hợp.</td></tr>`;
         return;
       }
 
@@ -262,17 +247,12 @@
         sumBalanceEl.textContent = fmtVnd(bal);
         sumBalanceEl.className = "val " + (bal >= 0 ? "pos" : "neg");
       }
-      syncStatus.textContent = `Đã đồng bộ từ Google Sheet lúc ${data.updatedAt || "vừa xong"} (${transactions.length} dòng).`;
+      syncStatus.textContent = `Đã tải trực tiếp từ Code.gs lúc ${data.updatedAt || "vừa xong"} (${transactions.length} dòng).`;
       render();
     }
 
     function loadFromSheet() {
-      if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.indexOf("DAN_LINK_APPS_SCRIPT") === 0) {
-        syncStatus.textContent = "Chưa gắn link Google Apps Script (/exec) vào APPS_SCRIPT_URL trong mã index.html.";
-        render();
-        return;
-      }
-      summaryLine.textContent = "Đang đồng bộ từ Google Sheet...";
+      summaryLine.textContent = "Đang tải từ Code.gs...";
       const cbName = "handleSheetData_" + Date.now();
       const script = document.createElement("script");
       window[cbName] = function(data) {
@@ -283,7 +263,7 @@
       script.onerror = function() {
         delete window[cbName];
         script.remove();
-        syncStatus.textContent = "Không tải được dữ liệu từ Apps Script. Kiểm tra lại quyền truy cập Web App là 'Bất kỳ ai' (Anyone).";
+        syncStatus.textContent = "Không tải được dữ liệu từ Code.gs. Kiểm tra lại quyền truy cập Web App là 'Bất kỳ ai' (Anyone).";
       };
       script.src = `${APPS_SCRIPT_URL}${APPS_SCRIPT_URL.includes("?") ? "&" : "?"}callback=${cbName}&_=${Date.now()}`;
       document.body.appendChild(script);
