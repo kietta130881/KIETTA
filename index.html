@@ -87,13 +87,7 @@
 
     .btn:hover { background: #f8fafc; }
 
-    .btn.primary {
-      background: var(--primary);
-      border-color: var(--primary);
-      color: #ffffff;
-    }
-
-    .btn.active {
+    .btn.primary, .btn.active {
       background: var(--primary);
       border-color: var(--primary);
       color: #ffffff;
@@ -387,13 +381,12 @@
 
       <div class="footer-note">
         <span>Link mở trên điện thoại &amp; gửi người thân: <a href="https://kietta130881.github.io/KIETTA/" target="_blank" rel="noopener">https://kietta130881.github.io/KIETTA/</a></span>
-        <span id="syncStamp">Đã đồng bộ dữ liệu sổ lúc 24/11/2026 09:32:00 (131 dòng).</span>
+        <span id="syncStamp">Đã đồng bộ dữ liệu sổ lúc 24/11/2026 09:37:00 (131 dòng).</span>
       </div>
     </div>
   </div>
 
   <script>
-    // Tùy chọn: điền URL Web App Apps Script (doGet trả JSON mảng bản ghi) nếu muốn đồng bộ trực tiếp khi bấm "Cập nhật lại"
     const APPS_SCRIPT_URL = "";
 
     const INITIAL_ROWS = [
@@ -700,11 +693,9 @@
       canvas.height = height;
       const ctx = canvas.getContext("2d");
 
-      // Nền báo cáo
       ctx.fillStyle = "#f4f6f9";
       ctx.fillRect(0, 0, width, height);
 
-      // Khung tiêu đề
       ctx.fillStyle = "#ffffff";
       ctx.fillRect(28, 24, width - 56, 110);
       ctx.fillStyle = "#0f172a";
@@ -716,7 +707,6 @@
       ctx.fillText(`Bộ lọc: ${scopeText}  |  Số khoản: ${filtered.length}`, 48, 95);
       ctx.fillText(`Số dư Ví VETC: ${document.getElementById("vetcBalance").textContent}`, 48, 118);
 
-      // 3 thẻ tổng quan theo bộ lọc
       const cards = [
         { label: "Tổng Thu", value: fmtMoney(sumThu), color: "#15803d" },
         { label: "Tổng Chi", value: fmtMoney(sumChiAbs), color: "#b91c1c" },
@@ -736,7 +726,6 @@
         ctx.fillText(c.value, x + 16, y + 56);
       });
 
-      // Bảng chi tiết
       let y = 232;
       ctx.fillStyle = "#0f766e";
       ctx.fillRect(28, y, width - 56, 32);
