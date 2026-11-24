@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sổ Thu Chi Mini - Xe 50F20703V</title>
+  <title>Sổ Thu Chi · Xe 50F20703V</title>
   <link rel="icon" type="image/png" href="https://kietta130881.github.io/KIETTA/SOTHUCHI.png" />
   <link rel="apple-touch-icon" href="https://kietta130881.github.io/KIETTA/SOTHUCHI.png" />
   <style>
@@ -15,20 +15,26 @@
       --green: #0f766e;
       --green-light: #e6f4f1;
       --red: #b91c1c;
+      --red-light: #fef2f2;
       --border: #dce5e0;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: var(--bg); color: var(--text); padding: 16px; }
-    .wrap { max-width: 720px; margin: 0 auto; }
+    body { background: var(--bg); color: var(--text); padding: 14px; }
+    .wrap { max-width: 920px; margin: 0 auto; }
     .header {
-      display: flex; align-items: center; gap: 12px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
       background: var(--card); border: 1px solid var(--border);
-      border-radius: 14px; padding: 14px 16px; margin-bottom: 14px;
+      border-radius: 14px; padding: 14px 16px; margin-bottom: 12px;
     }
+    .header-left { display: flex; align-items: center; gap: 12px; }
     .header img { width: 46px; height: 46px; border-radius: 10px; object-fit: cover; border: 1px solid var(--border); }
     .header h1 { font-size: 18px; line-height: 1.3; }
     .header p { font-size: 13px; color: var(--muted); }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 14px; }
+    .btn-reload {
+      border: 1px solid var(--green); background: var(--green-light); color: var(--green);
+      padding: 8px 12px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer;
+    }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 12px; }
     .card {
       background: var(--card); border: 1px solid var(--border);
       border-radius: 14px; padding: 14px 16px;
@@ -39,41 +45,80 @@
     .val.neg { color: var(--red); }
     .banner {
       background: var(--green); color: #fff; border-radius: 14px;
-      padding: 16px; display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 14px;
+      padding: 14px 16px; display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 12px; gap: 10px;
     }
-    .banner small { display: block; opacity: 0.9; font-size: 12px; margin-top: 2px; }
-    .banner .big { font-size: 22px; font-weight: 700; }
+    .banner small { display: block; opacity: 0.92; font-size: 12px; margin-top: 2px; }
+    .banner .big { font-size: 21px; font-weight: 700; white-space: nowrap; }
+    .panel {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 14px 16px; margin-bottom: 12px;
+    }
+    .panel-top {
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
+      gap: 10px; margin-bottom: 12px;
+    }
+    .panel-title { font-size: 16px; font-weight: 700; }
+    .sub-stat { font-size: 13px; color: var(--muted); }
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .btn-filter {
+      border: 1px solid var(--border); background: #fff; color: var(--text);
+      padding: 7px 12px; border-radius: 999px; font-size: 13px; cursor: pointer;
+    }
+    .btn-filter.active { background: var(--green); color: #fff; border-color: var(--green); font-weight: 600; }
+    .search-input {
+      width: 100%; padding: 10px 12px; border: 1px solid var(--border);
+      border-radius: 10px; font-size: 14px; margin-bottom: 12px; background: #fafcfb;
+    }
+    .table-wrap { overflow-x: auto; max-height: 480px; overflow-y: auto; border: 1px solid var(--border); border-radius: 10px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th {
+      position: sticky; top: 0; background: #eef3f0; color: var(--text);
+      text-align: left; padding: 10px; border-bottom: 1px solid var(--border); z-index: 1;
+    }
+    td { padding: 9px 10px; border-bottom: 1px solid #edf2ef; vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    .badge {
+      display: inline-block; padding: 2px 8px; border-radius: 999px;
+      font-size: 11px; font-weight: 600;
+    }
+    .badge.thu { background: var(--green-light); color: var(--green); }
+    .badge.chi { background: var(--red-light); color: var(--red); }
+    .amt-thu { color: var(--green); font-weight: 600; text-align: right; white-space: nowrap; }
+    .amt-chi { color: var(--red); font-weight: 600; text-align: right; white-space: nowrap; }
     .share-box {
       background: var(--green-light); border: 1px solid #b5ddd4;
       border-radius: 12px; padding: 12px 14px; font-size: 13px;
     }
     .share-box strong { display: block; margin-bottom: 4px; color: var(--green); }
-    .note { margin-top: 12px; font-size: 12px; color: var(--muted); line-height: 1.5; }
+    .status-note { margin-top: 10px; font-size: 12px; color: var(--muted); line-height: 1.5; }
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="header">
-      <img src="https://kietta130881.github.io/KIETTA/SOTHUCHI.png" alt="Logo Sổ Thu Chi" />
-      <div>
-        <h1>Sổ Thu Chi Mini</h1>
-        <p>Tổng Quan Thu Chi &amp; VETC · Xe 50F20703V</p>
+      <div class="header-left">
+        <img src="https://kietta130881.github.io/KIETTA/SOTHUCHI.png" alt="Logo Sổ Thu Chi" />
+        <div>
+          <h1>Sổ Thu Chi · Xe 50F20703V</h1>
+          <p id="subtitleText">Đồng bộ trực tiếp Google Sheet · Xe 50F20703V</p>
+        </div>
       </div>
+      <button class="btn-reload" id="reloadBtn" type="button">Cập nhật lại</button>
     </div>
 
     <div class="grid">
       <div class="card">
         <div class="label">Tổng Thu</div>
-        <div class="val pos">96.707.000 ₫</div>
+        <div class="val pos" id="sumThu">96.707.000 ₫</div>
       </div>
       <div class="card">
         <div class="label">Tổng Chi</div>
-        <div class="val neg">28.699.767 ₫</div>
-</div>
+        <div class="val neg" id="sumChi">28.699.767 ₫</div>
+      </div>
       <div class="card">
         <div class="label">Tồn Quỹ (Thu − Chi)</div>
-        <div class="val pos">68.007.233 ₫</div>
+        <div class="val pos" id="sumBalance">68.007.233 ₫</div>
       </div>
     </div>
 
@@ -85,14 +130,177 @@
       <div class="big">404.000 ₫</div>
     </div>
 
+    <div class="panel">
+      <div class="panel-top">
+        <div class="panel-title">Chi tiết các khoản Thu / Chi</div>
+        <div class="sub-stat" id="summaryLine">Đang tải dữ liệu...</div>
+      </div>
+
+      <div class="filters" id="filterBar">
+        <button class="btn-filter active" data-filter="ALL">Tất cả</button>
+        <button class="btn-filter" data-filter="THU">Khoản Thu</button>
+        <button class="btn-filter" data-filter="CHI">Khoản Chi</button>
+        <button class="btn-filter" data-filter="VETC">VETC</button>
+        <button class="btn-filter" data-filter="SAC">Sạc pin</button>
+        <button class="btn-filter" data-filter="KHAC">Shopee / Khác</button>
+      </div>
+
+      <input
+        type="text"
+        id="searchInput"
+        class="search-input"
+        placeholder="Tìm theo nội dung, ngày (vd: 18/11/2026), danh mục, hình thức hoặc số tiền..."
+      />
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>Ngày</th>
+              <th>Loại</th>
+              <th>Danh mục</th>
+              <th>Nội dung</th>
+              <th style="text-align:right;">Số tiền</th>
+            </tr>
+          </thead>
+          <tbody id="txBody">
+            <tr><td colspan="6" style="text-align:center;color:#5a6b61;padding:18px;">Đang tải dữ liệu từ Google Sheet...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
     <div class="share-box">
       <strong>Link mở trên điện thoại &amp; gửi người thân</strong>
       <span>https://kietta130881.github.io/KIETTA/</span>
     </div>
 
-    <p class="note">
-      Mẹo trên điện thoại: Mở link bằng Google Chrome, chạm biểu tượng ba chấm (⋮) rồi chọn &ldquo;Thêm vào Màn hình chính&rdquo; để ghim ứng dụng kèm biểu tượng.
+    <p class="status-note" id="syncStatus">
+      Nguồn dữ liệu: Google Sheet Sổ Thu Chi Hàng Ngày. Khi bạn thêm/xóa dòng trên Sheet hoặc nhờ cập nhật, bấm &ldquo;Cập nhật lại&rdquo; hoặc tải lại trang để xem số liệu mới.
     </p>
   </div>
+
+  <script>
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbymiRccSimgcBN5NU6OadwjRtgkB-yfCyuujX-xUMHWAftLaTKDBreuvd5dgJlhqHwY_Q/exec";
+
+    let transactions = [];
+    let activeFilter = "ALL";
+
+    const txBody = document.getElementById("txBody");
+    const summaryLine = document.getElementById("summaryLine");
+    const searchInput = document.getElementById("searchInput");
+    const syncStatus = document.getElementById("syncStatus");
+    const sumThuEl = document.getElementById("sumThu");
+    const sumChiEl = document.getElementById("sumChi");
+    const sumBalanceEl = document.getElementById("sumBalance");
+    const reloadBtn = document.getElementById("reloadBtn");
+
+    const fmtVnd = (n) => Number(n || 0).toLocaleString("vi-VN") + " ₫";
+
+    function detectGroup(item) {
+      const cat = String(item.category || "").toLowerCase();
+      const desc = String(item.desc || "").toLowerCase();
+      if (cat.includes("vetc") || cat.includes("cầu đường") || desc.includes("vetc") || desc.includes("trạm")) {
+        return "VETC";
+      }
+      if (cat.includes("sạc") || cat.includes("nhiên liệu") || desc.includes("sạc")) {
+        return "SAC";
+      }
+      return "KHAC";
+    }
+
+    function render() {
+      const q = searchInput.value.trim().toLowerCase();
+      const filtered = transactions.filter((item) => {
+        if (activeFilter === "THU" && item.type !== "Thu") return false;
+        if (activeFilter === "CHI" && item.type !== "Chi") return false;
+        if (["VETC", "SAC", "KHAC"].includes(activeFilter) && detectGroup(item) !== activeFilter) return false;
+        if (!q) return true;
+        return (
+          String(item.stt).toLowerCase().includes(q) ||
+          String(item.date).toLowerCase().includes(q) ||
+          String(item.type).toLowerCase().includes(q) ||
+          String(item.category).toLowerCase().includes(q) ||
+          String(item.desc).toLowerCase().includes(q) ||
+          String(item.note).toLowerCase().includes(q) ||
+          String(item.amount).includes(q.replace(/\D/g, ""))
+        );
+      });
+
+      const totalFiltered = filtered.reduce((acc, cur) => acc + Number(cur.amount || 0), 0);
+      summaryLine.textContent = `${filtered.length} khoản · Tổng: ${fmtVnd(totalFiltered)}`;
+
+      if (!filtered.length) {
+        txBody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:#5a6b61;padding:18px;">Không tìm thấy giao dịch phù hợp.</td></tr>`;
+        return;
+      }
+
+      txBody.innerHTML = filtered.map((item) => {
+        const isThu = item.type === "Thu";
+        const extraNote = item.note ? ` <span style="color:#5a6b61;font-size:12px;">(${item.note})</span>` : "";
+        return `
+          <tr>
+            <td>${item.stt}</td>
+            <td style="white-space:nowrap;">${item.date}</td>
+            <td><span class="badge ${isThu ? "thu" : "chi"}">${item.type}</span></td>
+            <td>${item.category}</td>
+            <td>${item.desc}${extraNote}</td>
+            <td class="${isThu ? "amt-thu" : "amt-chi"}">${isThu ? "+" : "-"}${fmtVnd(item.amount)}</td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function applyPayload(data) {
+      if (!data || !Array.isArray(data.transactions)) return;
+      transactions = data.transactions;
+      if (data.summary) {
+        sumThuEl.textContent = fmtVnd(data.summary.totalThu);
+        sumChiEl.textContent = fmtVnd(data.summary.totalChi);
+        const bal = Number(data.summary.balance || 0);
+        sumBalanceEl.textContent = fmtVnd(bal);
+        sumBalanceEl.className = "val " + (bal >= 0 ? "pos" : "neg");
+      }
+      syncStatus.textContent = `Đã đồng bộ từ Google Sheet lúc ${data.updatedAt || "vừa xong"} (${transactions.length} dòng).`;
+      render();
+    }
+
+    function loadFromSheet() {
+      if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.indexOf("DAN_LINK_APPS_SCRIPT") === 0) {
+        syncStatus.textContent = "Chưa gắn link Google Apps Script (/exec) vào APPS_SCRIPT_URL trong mã index.html.";
+        render();
+        return;
+      }
+      summaryLine.textContent = "Đang đồng bộ từ Google Sheet...";
+      const cbName = "handleSheetData_" + Date.now();
+      const script = document.createElement("script");
+      window[cbName] = function(data) {
+        applyPayload(data);
+        delete window[cbName];
+        script.remove();
+      };
+      script.onerror = function() {
+        delete window[cbName];
+        script.remove();
+        syncStatus.textContent = "Không tải được dữ liệu từ Apps Script. Kiểm tra lại quyền truy cập Web App là 'Bất kỳ ai' (Anyone).";
+      };
+      script.src = `${APPS_SCRIPT_URL}${APPS_SCRIPT_URL.includes("?") ? "&" : "?"}callback=${cbName}&_=${Date.now()}`;
+      document.body.appendChild(script);
+    }
+
+    document.querySelectorAll(".btn-filter").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".btn-filter").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeFilter = btn.dataset.filter;
+        render();
+      });
+    });
+
+    searchInput.addEventListener("input", render);
+    reloadBtn.addEventListener("click", loadFromSheet);
+    loadFromSheet();
+  </script>
 </body>
 </html>
